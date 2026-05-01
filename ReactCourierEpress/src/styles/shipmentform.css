@@ -1,0 +1,144 @@
+.form-page {
+  width: 100%;
+}
+
+.form-card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 8px 24px rgba(17, 24, 39, 0.06);
+}
+
+.form-header {
+  margin-bottom: 24px;
+}
+
+.form-header h3 {
+  margin: 0;
+  color: var(--text);
+  font-weight: 800;
+}
+
+.form-header p {
+  margin: 6px 0 0;
+  color: var(--subtext);
+}
+
+.shipment-form {
+  width: 100%;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 0 14px;
+  outline: none;
+  background: #ffffff;
+  font-size: 15px;
+ 
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--primary);
+}
+
+.form-group label {
+  margin-bottom: 7px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.form-group input {
+  height: 44px;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 0 14px;
+  outline: none;
+  background: #ffffff;
+}
+
+.form-group input:focus {
+  border-color: var(--primary);
+}
+
+.form-actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+}
+
+.btn-submit {
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  background: var(--secondary);
+}
+
+.btn-cancel {
+  background: #F3F4F6;
+  color: var(--text);
+  border: none;
+  border-radius: 10px;
+  padding: 11px 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-cancel:hover {
+  background: #E5E7EB;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.detail-item {
+  background: #F9FAFB;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.detail-item span {
+  display: block;
+  color: var(--subtext);
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.detail-item strong {
+  color: var(--text);
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+  
+}
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
