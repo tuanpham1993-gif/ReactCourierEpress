@@ -9,7 +9,13 @@ import "./styles/shipmentform.css";
 import "./styles/tracking.css";
 import "./styles/branches.css";
 import "./styles/agent.css";
+import "./styles/assignOrders.css";
+import "./styles/customers.css";
+import "./styles/invoices.css";
+import "./styles/reports.css";
+import "./styles/setting.css";
 import { BrowserRouter } from "react-router-dom";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

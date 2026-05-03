@@ -3,7 +3,7 @@ import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   const [user, setUser] = useState(() => {
-    const stored = localStorage.getItem("user");
+    const stored = localStorage.getItem("user");// lấy thông tin user bằng key "user" từ localStorage
 
     if (!stored || stored === "undefined") return null;
 
@@ -14,7 +14,7 @@ function App() {
     }
   });
 
-  return( <AppRoutes user={user} />
+  return( <AppRoutes user={user} /> 
     
   );
 }

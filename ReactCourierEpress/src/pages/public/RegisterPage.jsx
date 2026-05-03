@@ -58,10 +58,10 @@ export default function RegisterPage() {
 
       alert("Đăng ký thành công!");
 
-      // 👉 lưu luôn (auto login nếu muốn)
+      // LƯU USER VÀO LOCALSTORAGE
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      // 👉 redirect
+      // CHUYỂN HƯỚNG ĐẾN TRANG LOGIN
       navigate("/login");
 
     } catch (err) {

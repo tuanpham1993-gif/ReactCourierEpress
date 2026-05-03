@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { updateProfile, getProfile } from "../../services/authService";
 import { useEffect } from "react";
+
 export default function CustomerProfile() {
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (!user) return;
-
-    getProfile(user.id)
-      .then((res) => {
+    const fetchProfile = async () => {
+      try {
+        const res = await getProfile(); // KHÔNG CẦN ID
         const u = res.data.user;
 
         setForm({
@@ -18,10 +16,12 @@ export default function CustomerProfile() {
           address: u.address || "",
           city: u.city || "",
         });
-      })
-      .catch((err) => {
+      } catch (err) {
         console.log("Load profile error", err);
-      });
+      }
+    };
+
+    fetchProfile();
   }, []);
   const [form, setForm] = useState({
     full_name: "Nguyễn Văn A",
@@ -57,21 +57,15 @@ export default function CustomerProfile() {
 
   const handleUpdate = async () => {
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
-
-      const res = await updateProfile({
-        id: user.id, // lấy động từ user login
-        ...form,
-      });
+      const res = await updateProfile(form); // 🔥 KHÔNG gửi id
 
       setMessage(res.data.message);
 
-      // update lại localStorage luôn
+      // cập nhật lại user
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      console.log(res.data.user);
     } catch (err) {
-      setMessage("Cập nhật thất bại");
+      setMessage(err.response?.data?.message || "Cập nhật thất bại");
     }
   };
 

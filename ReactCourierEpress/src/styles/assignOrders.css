@@ -1,0 +1,131 @@
+.assign-page {
+  width: 100%;
+}
+
+.assign-header {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 22px 26px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(17, 24, 39, 0.06);
+}
+
+.assign-header h3 {
+  margin: 0;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.assign-header p {
+  margin: 6px 0 0;
+  color: var(--subtext);
+}
+
+.assign-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 20px;
+}
+
+.assign-form-card,
+.assign-table-card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(17, 24, 39, 0.06);
+}
+
+.assign-form-card h4,
+.assign-table-card h4 {
+  margin: 0 0 18px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.assign-form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.assign-form-group label {
+  font-weight: 700;
+  margin-bottom: 7px;
+  color: var(--text);
+}
+
+.assign-form-group select {
+  height: 44px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0 14px;
+  outline: none;
+  background: #ffffff;
+}
+
+.assign-form-group select:focus {
+  border-color: var(--primary);
+}
+
+.assign-form-group select:disabled {
+  background: #f3f4f6;
+  color: var(--subtext);
+  cursor: not-allowed;
+}
+
+.btn-assign {
+  width: 100%;
+  height: 44px;
+  border: none;
+  border-radius: 10px;
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-assign:hover {
+  background: var(--secondary);
+}
+
+.assign-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.assign-table th,
+.assign-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  font-size: 14px;
+}
+
+.assign-table thead {
+  background: #f3f4f6;
+}
+
+.assign-table th {
+  font-weight: 800;
+}
+
+.btn-delete-assign {
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 7px 9px;
+  color: #dc2626;
+  cursor: pointer;
+}
+
+.empty-data {
+  text-align: center;
+  color: var(--subtext);
+  padding: 24px;
+}
+
+@media (max-width: 1100px) {
+  .assign-grid {
+    grid-template-columns: 1fr;
+  }
+}

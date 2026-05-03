@@ -25,7 +25,7 @@ export default function NotificationsPage() {
     },
   ]);
 
-  // ✅ Đánh dấu đã đọc
+  //  Đánh dấu đã đọc
   const markAsRead = (id) => {
     setNotifications(
       notifications.map((item) =>

@@ -5,53 +5,42 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
+
 class UserController extends Controller
 {
     //
     public function updateProfile(Request $request)
     {
+        $user = auth()->user();// lấy thông tin user hiện tại
+
         $request->validate([
             'full_name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email,' . $user->id,
             'phone' => 'required',
             'address' => 'nullable',
             'city' => 'nullable',
         ]);
 
-        // tạm thời chưa auth → dùng id gửi từ frontend
-        $user = User::find($request->id);
-
-        if (!$user) {
-            return response()->json([
-                'message' => 'User không tồn tại'
-            ], 404);
-        }
-
-        $user->update([
-            'full_name' => $request->full_name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'city' => $request->city,
-        ]);
+        $user->update($request->only([
+            'full_name',
+            'email',
+            'phone',
+            'address',
+            'city'
+        ]));
 
         return response()->json([
             'message' => 'Cập nhật thành công',
             'user' => $user
         ]);
     }
-    public function getProfile($id)
+    public function getProfile()
     {
-        $user = User::find($id);
-
-        if (!$user) {
-            return response()->json([
-                'message' => 'User không tồn tại'
-            ], 404);
-        }
-
         return response()->json([
-            'user' => $user
+            'user' => Auth::user()// lấy thông tin user hiện tại
         ]);
     }
 }

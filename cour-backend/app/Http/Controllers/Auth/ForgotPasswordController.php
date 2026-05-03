@@ -45,7 +45,7 @@ class ForgotPasswordController extends Controller
 
         // trả về link reset (thực tế sẽ gửi email)
         // 🔥 tạo link reset
-        $link = "http://localhost:5173/reset-password?token=$token";
+        $link = "http://localhost:3000/reset-password?token=$token";
 
         // 🔥 GỬI EMAIL
         Mail::to($user->email)->send(new ResetPasswordMail($link));

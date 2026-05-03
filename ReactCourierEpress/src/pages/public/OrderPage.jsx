@@ -21,7 +21,7 @@ export default function OrderPage() {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    // ✅ TÍNH PHÍ
+    // TÍNH PHÍ
     const calculateFee = () => {
         if (!form.weight || form.weight <= 0) {
             return alert("Nhập khối lượng hợp lệ");
@@ -37,7 +37,7 @@ export default function OrderPage() {
         setFee(result);
     };
 
-    // ✅ ĐẶT ĐƠN
+    //  ĐẶT ĐƠN
     const handleOrder = () => {
         const user = localStorage.getItem("user");
 

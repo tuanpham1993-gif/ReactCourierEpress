@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
+
 
 class AuthController extends Controller
 {
     //
-     public function register(Request $request)
+    public function register(Request $request)
     {
         $request->validate([
             'username' => 'required|unique:users',
@@ -52,29 +55,33 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        $user = User::where('username', $request->username)
-            ->orWhere('email', $request->username)
-            ->first();
+        $credentials = [
+            'password' => $request->password
+        ];
 
-        if (!$user) {
-            return response()->json(['message' => 'Sai tài khoản hoặc mật khẩu'], 401);
-        }
+        // thử username
+        $credentials['username'] = $request->username;
 
-        if (!Hash::check(trim($request->password), $user->password)) {
-            return response()->json(['message' => 'Sai tài khoản hoặc mật khẩu'], 401);
+        if (!$token = Auth::attempt($credentials)) {
+
+            // thử email
+            unset($credentials['username']);
+            $credentials['email'] = $request->username;
+
+            if (!$token = Auth::attempt($credentials)) {
+                return response()->json([
+                    'message' => 'Sai tài khoản hoặc mật khẩu'
+                ], 401);
+            }
         }
 
         return response()->json([
-            'user' => $user
+            'token' => $token,
+            'user' => Auth::user()
         ]);
     }
-    // GET USER LOGIN
 
-    // LOGOUT
-    public function logout()
-    {
-        return response()->json([
-            'message' => 'OK'
-        ]);
-    }
+    
+    
+  
 }

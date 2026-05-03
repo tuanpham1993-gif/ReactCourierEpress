@@ -1,41 +1,65 @@
 import React, { useState } from "react";
+import TrackingForm from "../../components/tracking/TrackingForm";
+import TrackingTimeline from "../../components/tracking/TrackingTimeline";
 
 function ShipmentTracking() {
-  const [trackingCode, setTrackingCode] = useState("TRK001");
+  const [selectedCode, setSelectedCode] = useState("");
+  const [trackingList, setTrackingList] = useState([]);
 
+  // Dữ liệu tracking mẫu
   const trackingData = {
     TRK001: [
       {
         status: "Pending",
-        note: "Đơn hàng đã được tạo",
-        date: "2026-04-28 08:00",
+        note: "Đơn hàng đã được tạo.",
+        created_at: "2026-04-28 08:00",
       },
       {
         status: "Picked Up",
-        note: "Agent đã nhận hàng",
-        date: "2026-04-28 10:30",
+        note: "Agent đã nhận hàng từ người gửi.",
+        created_at: "2026-04-28 10:30",
       },
       {
         status: "In Transit",
-        note: "Đơn hàng đang được vận chuyển",
-        date: "2026-04-28 14:00",
+        note: "Đơn hàng đang được vận chuyển.",
+        created_at: "2026-04-28 14:00",
       },
     ],
+
     TRK002: [
       {
         status: "Pending",
-        note: "Đơn hàng đã được tạo",
-        date: "2026-04-29 09:00",
+        note: "Đơn hàng đã được tạo.",
+        created_at: "2026-04-29 09:00",
       },
       {
         status: "In Transit",
-        note: "Đơn hàng đang vận chuyển",
-        date: "2026-04-29 13:00",
+        note: "Đơn hàng đang vận chuyển.",
+        created_at: "2026-04-29 13:00",
+      },
+    ],
+
+    TRK003: [
+      {
+        status: "Pending",
+        note: "Đơn hàng đã được tạo.",
+        created_at: "2026-04-30 08:00",
+      },
+      {
+        status: "Delivered",
+        note: "Đơn hàng đã giao thành công.",
+        created_at: "2026-04-30 17:00",
       },
     ],
   };
 
-  const currentTracking = trackingData[trackingCode] || [];
+  // Nhận mã tracking từ TrackingForm rồi tìm lịch sử tương ứng
+  const handleSearch = (code) => {
+    const upperCode = code.toUpperCase();
+
+    setSelectedCode(upperCode);
+    setTrackingList(trackingData[upperCode] || []);
+  };
 
   return (
     <div className="tracking-page">
@@ -47,40 +71,15 @@ function ShipmentTracking() {
           </div>
         </div>
 
-        <div className="tracking-search">
-          <input
-            type="text"
-            value={trackingCode}
-            onChange={(e) => setTrackingCode(e.target.value.toUpperCase())}
-            placeholder="Nhập mã tracking..."
-          />
+        <TrackingForm onSearch={handleSearch} />
 
-          <button>Tìm kiếm</button>
-        </div>
+        {selectedCode && (
+          <div className="tracking-result-title">
+            Mã tracking: <strong>{selectedCode}</strong>
+          </div>
+        )}
 
-        <div className="tracking-result">
-          <h4>Mã tracking: {trackingCode}</h4>
-
-          {currentTracking.length > 0 ? (
-            <div className="timeline">
-              {currentTracking.map((item, index) => (
-                <div className="timeline-item" key={index}>
-                  <div className="timeline-dot"></div>
-
-                  <div className="timeline-content">
-                    <h5>{item.status}</h5>
-                    <p>{item.note}</p>
-                    <span>{item.date}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="empty-tracking">
-              Không tìm thấy lịch sử tracking cho mã này.
-            </div>
-          )}
-        </div>
+        <TrackingTimeline trackingList={trackingList} />
       </div>
     </div>
   );

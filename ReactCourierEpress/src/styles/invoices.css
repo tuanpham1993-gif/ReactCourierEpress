@@ -1,0 +1,204 @@
+.invoice-page {
+  width: 100%;
+}
+
+.invoice-header {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 22px 26px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(17, 24, 39, 0.06);
+}
+
+.invoice-header h3 {
+  margin: 0;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.invoice-header p {
+  margin: 6px 0 0;
+  color: var(--subtext);
+}
+
+.invoice-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  gap: 20px;
+}
+
+.invoice-list-card,
+.invoice-detail-card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(17, 24, 39, 0.06);
+}
+
+.invoice-list-card h4,
+.invoice-detail-card h4 {
+  margin: 0 0 18px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.invoice-table th,
+.invoice-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  font-size: 14px;
+}
+
+.invoice-table thead {
+  background: #f3f4f6;
+}
+
+.invoice-table th {
+  font-weight: 800;
+}
+
+.invoice-code {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.invoice-total {
+  color: #166534;
+  font-weight: 800;
+}
+
+.btn-view-invoice,
+.btn-print-invoice {
+  border: none;
+  border-radius: 10px;
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-view-invoice {
+  padding: 8px 12px;
+}
+
+.btn-print-invoice {
+  width: 100%;
+  height: 44px;
+  margin-top: 18px;
+}
+
+.btn-view-invoice:hover,
+.btn-print-invoice:hover {
+  background: var(--secondary);
+}
+
+.invoice-title {
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+}
+
+.invoice-title h3 {
+  margin: 0;
+  color: var(--primary);
+  font-weight: 900;
+}
+
+.invoice-title p {
+  margin: 6px 0 0;
+  color: var(--subtext);
+}
+
+.invoice-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.invoice-info div {
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.invoice-info span,
+.invoice-summary span {
+  display: block;
+  color: var(--subtext);
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.invoice-info strong,
+.invoice-summary strong {
+  color: var(--text);
+}
+
+.invoice-summary {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 14px;
+}
+
+.invoice-summary div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.invoice-total-row {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 12px;
+  font-size: 18px;
+}
+
+.invoice-total-row strong {
+  color: #166534;
+}
+
+.empty-invoice {
+  background: #f9fafb;
+  color: var(--subtext);
+  border: 1px dashed #d1d5db;
+  border-radius: 12px;
+  padding: 22px;
+  text-align: center;
+}
+
+/* Khi in chỉ in phần hóa đơn */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .invoice-print-area,
+  .invoice-print-area * {
+    visibility: visible;
+  }
+
+  .invoice-print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: white;
+    padding: 30px;
+  }
+
+  .btn-print-invoice {
+    display: none;
+  }
+}
+
+@media (max-width: 1200px) {
+  .invoice-grid {
+    grid-template-columns: 1fr;
+  }
+}

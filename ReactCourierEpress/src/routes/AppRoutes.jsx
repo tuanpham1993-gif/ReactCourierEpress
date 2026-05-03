@@ -1,7 +1,8 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import MainLayout from "../layouts/MainLayout";
 import CustomerLayout from "../layouts/CustomerLayout";
+import AdminLayout from "../layouts/AdminLayout";
 
 // PUBLIC
 import HomePage from "../pages/public/HomePage";
@@ -11,7 +12,6 @@ import ForgotPasswordPage from "../pages/public/ForgotPasswordPage";
 import ResetPasswordPage from "../pages/public/ResetPasswordPage";
 import OrderPage from "../pages/public/OrderPage";
 import TrackingPage from "../pages/public/TrackingPage";
-
 
 // CUSTOMER
 import CustomerDashboard from "../pages/customer/Dashboard";
@@ -26,10 +26,14 @@ import Dashboard from "../pages/admin/Dashboard";
 import ShipmentDetail from "../pages/admin/ShipmentDetail";
 import ShipmentCreate from "../pages/admin/ShipmentCreate";
 import ShipmentEdit from "../pages/admin/ShipmentEdit";
-import AdminLayout from "../layouts/AdminLayout";
 import ShipmentTracking from "../pages/admin/ShipmentTracking";
 import Branches from "../pages/admin/Branches";
 import Agents from "../pages/admin/Agents";
+import AssignOrders from "../pages/admin/AssignOrders";
+import Customers from "../pages/admin/Customers";
+import Invoices from "../pages/admin/Invoices";
+import Reports from "../pages/admin/Reports";
+import Settings from "../pages/admin/Settings";
 
 // PROTECT
 import ProtectedRoute from "./ProtectedRoute";
@@ -38,7 +42,6 @@ import RoleRoute from "./RoleRoute";
 export default function AppRoutes({ user }) {
   return (
     <Routes>
-
       {/* PUBLIC */}
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
@@ -50,8 +53,9 @@ export default function AppRoutes({ user }) {
         <Route path="/tracking" element={<TrackingPage />} />
       </Route>
 
-      {/* CUSTOMER (PROTECTED + ROLE) */}
+      {/* CUSTOMER */}
       <Route
+        path="/customer"
         element={
           <ProtectedRoute user={user}>
             <RoleRoute user={user} role={3}>
@@ -60,17 +64,17 @@ export default function AppRoutes({ user }) {
           </ProtectedRoute>
         }
       >
-        <Route path="/customer/dashboard" element={<CustomerDashboard />} />
-        <Route path="/customer/my-shipments" element={<MyShipmentsPage />} />
-        <Route path="/customer/notifications" element={<NotificationsPage />} />
-        <Route path="/customer/create-shipment" element={<CreateShipmentPage />} />
-        <Route path="/customer/tracking" element={<CustomerTrackShipment />} />
-        <Route path="/customer/profile" element={<CustomerProfile />} />
+        <Route path="dashboard" element={<CustomerDashboard />} />
+        <Route path="my-shipments" element={<MyShipmentsPage />} />
+        <Route path="notifications" element={<NotificationsPage />} />
+        <Route path="create-shipment" element={<CreateShipmentPage />} />
+        <Route path="tracking" element={<CustomerTrackShipment />} />
+        <Route path="profile" element={<CustomerProfile />} />
       </Route>
 
-      {/* ADMIN (PROTECTED + ROLE) */}
-      {/* ADMIN (PROTECTED + ROLE) */}
+      {/* ADMIN */}
       <Route
+        path="/admin"
         element={
           <ProtectedRoute user={user}>
             <RoleRoute user={user} role={1}>
@@ -79,25 +83,27 @@ export default function AppRoutes({ user }) {
           </ProtectedRoute>
         }
       >
-        <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route index element={<Navigate to="shipments" replace />} />
 
-        <Route path="/admin/shipments" element={<Dashboard />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="customers" element={<Customers />} />
+        <Route path="invoices" element={<Invoices />} />
+        <Route path="reports" element={<Reports />} />
+        <Route path="settings" element={<Settings />} />
 
-        <Route path="/admin/shipment-tracking" element={<ShipmentTracking />} />
+        <Route path="shipments" element={<Dashboard />} />
+        <Route path="shipments/create" element={<ShipmentCreate />} />
+        <Route path="shipments/edit/:id" element={<ShipmentEdit />} />
+        <Route path="shipments/detail/:id" element={<ShipmentDetail />} />
 
-        <Route path="/admin/branches" element={<Branches />} />
-
-        <Route path="/admin/agents" element={<Agents />} />
-
-        <Route path="/admin/reports" element={<Dashboard />} />
-
-        <Route path="/admin/shipments/create" element={<ShipmentCreate />} />
-
-        <Route path="/admin/shipments/edit/:id" element={<ShipmentEdit />} />
-
-        <Route path="/admin/shipments/detail/:id" element={<ShipmentDetail />} />
+        <Route path="shipment-tracking" element={<ShipmentTracking />} />
+        <Route path="assign-orders" element={<AssignOrders />} />
+        <Route path="branches" element={<Branches />} />
+        <Route path="agents" element={<Agents />} />
       </Route>
 
+      {/* fallback */}
+      <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
     </Routes>
   );
 }

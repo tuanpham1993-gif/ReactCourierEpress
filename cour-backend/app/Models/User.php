@@ -7,8 +7,8 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;    
-
-class User extends Authenticatable
+use Tymon\JWTAuth\Contracts\JWTSubject;
+class User extends Authenticatable implements JWTSubject
 {
       // use HasApiTokens, Notifiable;
     // /** @use HasFactory<UserFactory> */
@@ -47,6 +47,15 @@ class User extends Authenticatable
     //         'password' => 'hashed',
     //     ];
     // }
+
+    public function getJWTIdentifier()// trả về giá trị định danh của người dùng để sử dụng trong JWT
+    {
+        return $this->getKey();// trả về giá trị của khóa chính (primary key) của người dùng, thường là trường 'id' trong cơ sở dữ liệu
+    }
+       public function getJWTCustomClaims()// trả về một mảng các thông tin tùy chỉnh sẽ được thêm vào payload của JWT
+    {
+        return [];// trả về 1 mảng rỗng
+    }
   protected $table = 'users';
 
     protected $fillable = [

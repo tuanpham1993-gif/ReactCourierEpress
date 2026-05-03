@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../services/authService";
 import { useEffect } from "react";
+import { getProfile } from "../../services/authService";
 export default function LoginPage() {
   const navigate = useNavigate();
 
@@ -24,19 +25,19 @@ export default function LoginPage() {
     }
 
     try {
-      const res = await login(form);
+      const res = await login(form); // gọi hàm login từ authService với form làm tham số
 
-      const user = res.data.user;
+      const user = res.data.user;// lấy thông tin user từ response trả về sau khi đăng nhập thành công 
+      const token = res.data.token;// lấy token từ response trả về sau khi đăng nhập thành công
 
-      // lưu user
-      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(user));// lưu thông tin user vào localStorage với key tên user và giá trị là chuỗi JSON của user
+      localStorage.setItem("token", token);// lưu token vào localStorage với key tên token và giá trị là token
 
       alert("Đăng nhập thành công");
 
-      // 🔥 phân quyền theo id
-      if (user.id === 1) {
+      if (user.role_id === 1) {
         window.location.href = "/admin/dashboard";
-      } else if (user.id === 3) {
+      } else if (user.role_id === 3) {
         window.location.href = "/customer/dashboard";
       } else {
         alert("Không có quyền truy cập");

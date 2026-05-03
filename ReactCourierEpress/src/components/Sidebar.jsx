@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    alert("Đăng xuất thành công");
+    window.location.href = "/login";
+  };
+
   return (
     <div
       style={{
@@ -51,10 +60,14 @@ export default function Sidebar() {
           </Link>
         </li>
 
+        {/* Logout */}
         <li className="nav-item mt-3">
-          <Link to="/login" className="nav-link text-warning">
+          <button
+            onClick={handleLogout}
+            className="btn btn-warning w-100"
+          >
             Logout
-          </Link>
+          </button>
         </li>
 
       </ul>

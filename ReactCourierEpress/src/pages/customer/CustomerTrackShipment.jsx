@@ -4,7 +4,7 @@ export default function CustomerTrackShipment() {
   const [trackingCode, setTrackingCode] = useState("");
   const [shipment, setShipment] = useState(null);
 
-  // 🔥 MOCK DATA (sau này thay API)
+  // MOCK DATA (sau này thay API)
   const mockData = {
     tracking_code: "TRK001",
     sender: "Nguyễn Văn A",

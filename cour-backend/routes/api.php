@@ -10,7 +10,13 @@ Route::get('/', function () {
 });
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
-Route::put('/profile', [UserController::class, 'updateProfile']);
-Route::get('/profile/{id}', [UserController::class, 'getProfile']);
+
 Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPassword']);
 Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword']);
+
+Route::middleware('auth:api')->group(function () {// nhóm các route cần xác thực
+
+    Route::get('/me', [UserController::class, 'getProfile']);
+    Route::put('/me', [UserController::class, 'updateProfile']);
+
+});
